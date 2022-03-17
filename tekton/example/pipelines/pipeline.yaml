@@ -8,15 +8,17 @@ spec:
   workspaces:
     - name: pipeline-ws
   tasks:
-    - name: git-clone
+    - name: git-clone-task
       taskRef:
-        name: task-git-clone
+        name: git-clone
       workspaces:
-        - name: source
+        - name: output
           workspace: pipeline-ws
       params:
       - name: url
         value: $(params.git-repo)
+      - name: revision
+        value: main
     - name: npm-install
       taskRef:
         name: npm
@@ -24,7 +26,7 @@ spec:
         - name: source
           workspace: pipeline-ws
       runAfter:
-        - git-clone
+        - git-clone-task
       params:
         - name: PATH_CONTEXT
           value: hello-world-example
@@ -37,7 +39,7 @@ spec:
         - name: source
           workspace: pipeline-ws
       runAfter:
-        - git-clone
+        - git-clone-task
         - npm-install
       params:
         - name: PATH_CONTEXT
@@ -51,7 +53,7 @@ spec:
         - name: source
           workspace: pipeline-ws
       runAfter:
-        - git-clone
+        - git-clone-task
         - npm-install
       params:
         - name: PATH_CONTEXT
@@ -70,7 +72,7 @@ spec:
         - name: action
           value: run build
       runAfter:
-        - git-clone
+        - git-clone-task
         - npm-install
     - name: ls-build-project
       taskRef:
@@ -79,7 +81,7 @@ spec:
       - name: source
         workspace: pipeline-ws
       runAfter:
-        - git-clone
+        - git-clone-task
         - npm-install
         - lint
         - test
