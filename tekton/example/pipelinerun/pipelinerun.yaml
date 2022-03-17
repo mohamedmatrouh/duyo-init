@@ -6,7 +6,7 @@ spec:
   pipelineRef:
     name: build-app-pipeline
   params:
-    - name: url
+    - name: git-repo
       value: https://github.com/mohamedmatrouh/hello-world-example.git
   workspaces:
   - name: pipeline-ws
