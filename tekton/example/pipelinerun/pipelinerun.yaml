@@ -1,0 +1,14 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: build-app-pipeline-run
+spec:
+  pipelineRef:
+    name: build-app-pipeline
+  params:
+    - name: url
+      value: https://github.com/mohamedmatrouh/hello-world-example.git
+  workspaces:
+  - name: pipeline-ws
+    persistentVolumeClaim:
+      claimName: tkn-pvc

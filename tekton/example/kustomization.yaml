@@ -1,0 +1,7 @@
+resources:
+  - pielinerun/pipelinerun.yaml
+  - pielines/pipeline.yaml
+  - tasks/git-clone.yaml
+  - tasks/ls-build-project.yaml
+  - tasks/npm-task.yaml
+  - volumes/pv-pvc.yaml
