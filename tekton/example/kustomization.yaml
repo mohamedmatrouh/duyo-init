@@ -1,6 +1,6 @@
 resources:
-  - pipelinerun/pipelinerun.yaml
-  - pipelines/pipeline.yaml
-  - tasks/ls-build-project.yaml
-  - tasks/npm-task.yaml
   - volumes/pv-pvc.yaml
+  - tasks/npm-task.yaml
+  - tasks/ls-build-project.yaml
+  - pipelines/pipeline.yaml
+  - pipelinerun/pipelinerun.yaml
