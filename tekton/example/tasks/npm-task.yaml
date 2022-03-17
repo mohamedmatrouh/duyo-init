@@ -15,7 +15,7 @@ spec:
   workspaces:
   - name: source
   steps:
-    - name: npm-build
+    - name: npm
       image: node:14
       command:
         - /bin/sh
