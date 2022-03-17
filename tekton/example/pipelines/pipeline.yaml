@@ -6,7 +6,7 @@ spec:
   params:
     - name: git-repo
   workspaces:
-    - pipeline-ws
+    - name: pipeline-ws
   tasks:
     - name: git-clone
       taskRef:
