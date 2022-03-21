@@ -19,9 +19,9 @@ spec:
         value: $(params.git-repo)
       - name: revision
         value: main
-    - name: npm-install
+    - name: check-npm-install
       taskRef:
-        name: npm
+        name: check-npm-install
       workspaces:
         - name: source
           workspace: pipeline-ws
@@ -30,8 +30,24 @@ spec:
       params:
         - name: PATH_CONTEXT
           value: hello-world-example
+    - name: npm-install
+      taskRef:
+        name: npm
+      workspaces:
+        - name: source
+          workspace: pipeline-ws
+      runAfter:
+        - git-clone-task
+        - check-npm-install
+      params:
+        - name: PATH_CONTEXT
+          value: hello-world-example
         - name: action
           value: install
+      when:
+          - input: $(check-npm-install.results.check-result)
+            operator: in
+            values: ["true"] 
     - name: lint
       taskRef:
         name: npm

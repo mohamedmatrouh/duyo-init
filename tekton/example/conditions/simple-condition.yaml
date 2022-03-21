@@ -1,0 +1,9 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Condition
+metadata:
+  name: simple-condition
+spec:
+  check:
+    image: alpine
+    script: |
+      exit 0

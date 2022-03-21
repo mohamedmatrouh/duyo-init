@@ -1,0 +1,52 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: check-npm-install
+  annotations:
+    description: |
+      Task to check if we need to run npm install
+spec:
+  params:
+    - name: PATH_CONTEXT
+      type: string
+      default: "."
+      description: The path where package.json of the project is defined.
+  workspaces:
+    - name: source
+  results:
+    - name: check-result
+      description: Result of the task
+  steps:
+    - name: check
+      image: bitnami/git
+      script: |
+      
+        cd $(workspaces.source.path/params.PATH_CONTEXT)
+
+        changedFiles="$(git diff --name-only HEAD@{1} HEAD)"
+
+        checkForChangedFiles() {
+            if [ -d node_modules ]; then
+                echo "$changedFiles" | grep -E --quiet "package(-lock)*\.json" && eval packageJsonHasChanged
+                exitFromTask 1
+            else
+                exitFromTask 0
+            fi
+            
+        }
+
+        packageJsonHasChanged() {
+            echo "Changes to package.json detected, installing updates"
+            exitFromTask 0
+        }
+
+        exitFromTask() {
+          if [ $1 == 0 ]; then
+            echo -n "true" | tee $(results.check-result.path)
+          else
+            echo -n "false" | tee $(results.check-result.path)
+          fi
+          exit 0;
+        }
+
+        checkForChangedFiles

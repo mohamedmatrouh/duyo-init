@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: simple-pipeline
+spec:
+  tasks:
+    - name: simple-task-with-condition
+      taskRef:
+        name: simple-task-with-condition
+      conditions:
+        - conditionRef: simple-condition
+    - name: simple-task
+      taskRef:
+        name: simple-task
+      runAfter:
+        - simple-task-with-condition
+    
