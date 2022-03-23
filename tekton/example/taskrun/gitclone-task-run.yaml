@@ -4,7 +4,7 @@ metadata:
   name: test-git-clone
 spec:
   taskRef:
-      name: git-clone
+    name: git-clone
     workspaces:
       - name: output
         persistentVolumeClaim:
