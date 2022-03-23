@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: test-check-cache
+spec:
+  taskRef:
+    name: check-npm-install-cache
+  workspaces:
+    - name: output
+      persistentVolumeClaim:
+        claimName: tkn-pvc
+    - name: cache
+      persistentVolumeClaim:
+        claimName: tkn-cache-pvc
+  params:
+  - name: PATH_CONTEXT
+    value: .
