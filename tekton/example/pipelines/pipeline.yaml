@@ -19,8 +19,6 @@ spec:
         value: $(params.git-repo)
       - name: revision
         value: main
-      - name: deleteExisting
-        value: "false"
     - name: check-npm-install
       taskRef:
         name: check-npm-install
