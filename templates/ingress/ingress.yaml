@@ -1,18 +1,21 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: example-service
+  name: tekton-dashboard
   annotations:
     kubernetes.io/ingress.class: "traefik"
     traefik.ingress.kubernetes.io/frontend-entry-points: http,https
     #traefik.ingress.kubernetes.io/redirect-entry-point: https
     #traefik.ingress.kubernetes.io/redirect-permanent: "true"
+  namespace: tekton-pipelines
 spec:
   rules:
-  - host: marcel.test
+  - host: dashboard.domain.tld
     http:
       paths:
-      - path: /
+      - pathType: ImplementationSpecific
         backend:
-          serviceName: example-service
-          servicePort: 80   
+          service:
+            name: tekton-dashboard
+            port:
+              number: 9097
