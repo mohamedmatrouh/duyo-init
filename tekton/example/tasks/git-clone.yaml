@@ -1,16 +1,32 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: task-git-clone
+  name: git-clone-task
 spec:
   workspaces:
-  - name: source
+    - name: source
   params:
-  - name: url
-    type: string
+    - name: url
+      type: string
+    - name: projectName
+      type: string
+    - name: revision
+      type: string
   steps:
-  - name: clone
-    image: bitnami/git
-    script: |
-      cd $(workspaces.source.path)
-      git clone $(params.url)
+    - name: clone
+      image: bitnami/git
+      script: |
+        cd $(workspaces.source.path)
+
+        pullNewChanges(){
+          cd $(workspaces.source.path/params.projectName)
+          git pull origin 
+        }
+
+        clean(){
+          rm -rf $(workspaces.source.path/params.projectName)
+        }
+
+        clone(){
+          git clone $(params.url)
+        }
