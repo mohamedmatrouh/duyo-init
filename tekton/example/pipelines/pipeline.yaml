@@ -29,7 +29,7 @@ spec:
         - git-clone-task
       params:
         - name: PATH_CONTEXT
-          value: hello-world-example
+          value: .
     - name: npm-install
       taskRef:
         name: npm
