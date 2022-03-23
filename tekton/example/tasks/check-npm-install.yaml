@@ -27,25 +27,29 @@ spec:
 
         checkForChangedFiles() {
             if [ -d node_modules ]; then
-                echo "$changedFiles" | grep -E --quiet "package(-lock)*\.json" && eval packageJsonHasChanged
+                echo "node modules folder detected."
+                if [ $(echo "$changedFiles" | grep -E --quiet "package(-lock)*\.json") ]; then
+                    echo "Changes to package.json detected, updates need to be installed"
+                    exitFromTask 0
+                else 
+                    echo "no Changes to package.json found, updates dont't need to be installed"
+                    exitFromTask 1
+                fi
             else
+                echo "node modules not found, updates need to be installed"
                 exitFromTask 0
             fi
             
         }
 
-        packageJsonHasChanged() {
-            echo "Changes to package.json detected, installing updates"
-            exitFromTask 1
-        }
-
         exitFromTask() {
-          if [ $1 == 0 ]; then
+            if [ $1 == 0 ]; then
             echo -n "true" | tee $(results.check-result.path)
-          else
+            else
             echo -n "false" | tee $(results.check-result.path)
-          fi
-          exit 0;
+            fi
+            
+            exit 0;
         }
 
         checkForChangedFiles
