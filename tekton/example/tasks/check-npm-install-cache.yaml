@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: check-npm-install
+  name: check-npm-install-cache
   annotations:
     description: |
       Task to check if we need to run npm install

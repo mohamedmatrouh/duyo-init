@@ -12,3 +12,6 @@ spec:
   - name: pipeline-ws
     persistentVolumeClaim:
       claimName: tkn-pvc
+  - name: pipeline-cache
+    persistentVolumeClaim:
+      claimName: tkn-cache-pvc

@@ -7,6 +7,7 @@ spec:
     - name: git-repo
   workspaces:
     - name: pipeline-ws
+    - name: pipeline-cache
   tasks:
     - name: git-clone-task
       taskRef:
@@ -21,10 +22,12 @@ spec:
         value: main
     - name: check-npm-install
       taskRef:
-        name: check-npm-install
+        name: check-npm-install-cache
       workspaces:
         - name: source
           workspace: pipeline-ws
+        - name: cache
+          workspace: pipeline-cache
       runAfter:
         - git-clone-task
       params:

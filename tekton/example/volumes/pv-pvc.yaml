@@ -11,9 +11,32 @@ spec:
     path: "/mnt/data"
 ---
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: tkn-cache-pv
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/cache"
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: tkn-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tkn-cache-pvc
 spec:
   accessModes:
     - ReadWriteOnce
