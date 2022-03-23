@@ -191,8 +191,12 @@ spec:
           # We don't just "rm -rf ${CHECKOUT_DIR}" because ${CHECKOUT_DIR} might be "/"
           # or the root of a mounted volume.
           if [ -d "${CHECKOUT_DIR}" ] ; then
-            # Delete non-hidden files and directories
-            rm -rf "${CHECKOUT_DIR:?}"/!(node_modules)
+            # Delete non-hidden files and directories except node-modules
+            for file in $CHECKOUT_DIR/*; do
+                if [[ $file != *"node_modules" ]]; then
+                    rm -rf "$file"
+                fi
+            done
             # Delete files and directories starting with . but excluding ..
             rm -rf "${CHECKOUT_DIR}"/.[!.]*
             # Delete files and directories starting with .. plus any other character
