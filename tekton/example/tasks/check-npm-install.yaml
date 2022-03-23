@@ -22,14 +22,12 @@ spec:
       script: |
       
         cd $(workspaces.source.path)
-        ls -al
 
         changedFiles="$(git diff --name-only HEAD@{1} HEAD)"
 
         checkForChangedFiles() {
             if [ -d node_modules ]; then
                 echo "$changedFiles" | grep -E --quiet "package(-lock)*\.json" && eval packageJsonHasChanged
-                exitFromTask 1
             else
                 exitFromTask 0
             fi
@@ -38,7 +36,7 @@ spec:
 
         packageJsonHasChanged() {
             echo "Changes to package.json detected, installing updates"
-            exitFromTask 0
+            exitFromTask 1
         }
 
         exitFromTask() {
