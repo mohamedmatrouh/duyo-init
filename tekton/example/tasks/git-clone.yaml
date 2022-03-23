@@ -192,7 +192,7 @@ spec:
           # or the root of a mounted volume.
           if [ -d "${CHECKOUT_DIR}" ] ; then
             # Delete non-hidden files and directories
-            rm -rf "${CHECKOUT_DIR:?}"/*node_modules
+            rm -rf "${CHECKOUT_DIR:?}"/[!node_modules]*
             # Delete files and directories starting with . but excluding ..
             rm -rf "${CHECKOUT_DIR}"/.[!.]*
             # Delete files and directories starting with .. plus any other character
