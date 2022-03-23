@@ -45,7 +45,7 @@ spec:
         - name: action
           value: install
       when:
-          - input: $(check-npm-install.results.check-result)
+          - input: $(check-npm-install.results.output)
             operator: in
             values: ["true"] 
     - name: lint
