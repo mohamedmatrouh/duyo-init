@@ -28,6 +28,7 @@ spec:
                 echo "node modules folder detected."
                 
                 changedFiles=$(git log --pretty=oneline -1 --name-only | grep -E "package(-lock)*\.json")
+                echo "changedFiles ==> $changedFiles"
                 if [ -z $changedFiles ]; then
                     echo "no Changes to package.json found, updates dont't need to be installed"
                     exitFromTask 1
