@@ -29,7 +29,7 @@ spec:
         - git-clone-task
       params:
         - name: PATH_CONTEXT
-          value: hello-world-example
+          value: .
     - name: npm-install
       taskRef:
         name: npm
@@ -41,7 +41,7 @@ spec:
         - check-npm-install
       params:
         - name: PATH_CONTEXT
-          value: hello-world-example
+          value: .
         - name: action
           value: install
       when:
@@ -59,7 +59,7 @@ spec:
         - npm-install
       params:
         - name: PATH_CONTEXT
-          value: hello-world-example
+          value: .
         - name: action
           value: run lint
     - name: test
@@ -73,7 +73,7 @@ spec:
         - npm-install
       params:
         - name: PATH_CONTEXT
-          value: hello-world-example
+          value: .
         - name: action
           value: run test
     - name: build
@@ -84,7 +84,7 @@ spec:
           workspace: pipeline-ws
       params:
         - name: PATH_CONTEXT
-          value: hello-world-example
+          value: .
         - name: action
           value: run build
       runAfter:
