@@ -6,7 +6,7 @@ spec:
   taskRef:
     name: check-npm-install-cache
   workspaces:
-    - name: output
+    - name: source
       persistentVolumeClaim:
         claimName: tkn-pvc
     - name: cache
