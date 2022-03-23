@@ -14,7 +14,7 @@ spec:
   workspaces:
     - name: source
   results:
-    - name: check-result
+    - name: output
       description: Result of the task
   steps:
     - name: check
