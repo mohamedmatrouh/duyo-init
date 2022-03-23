@@ -18,7 +18,7 @@ spec:
       description: Result of the task
   steps:
     - name: check
-      image: bitnami/git
+      image: docker.io/alpine/git:v2.26.2@sha256:23618034b0be9205d9cc0846eb711b12ba4c9b468efdd8a59aac1d7b1a23363f
       script: |
       
         cd $(workspaces.source.path/params.PATH_CONTEXT)
