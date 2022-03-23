@@ -44,9 +44,9 @@ spec:
 
         exitFromTask() {
             if [ $1 == 0 ]; then
-            echo -n "true" | tee $(results.check-result.path)
+              printf "true" | tee $(results.check-result.path)
             else
-            echo -n "false" | tee $(results.check-result.path)
+              printf "false" | tee $(results.check-result.path)
             fi
             
             exit 0;
