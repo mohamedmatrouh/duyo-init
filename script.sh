@@ -52,4 +52,4 @@ exitFromTask() {
     exit 0;
 }
 
-checkIfFilesHaveChanged file1.txt file2.txt file3.txt
+checkIfFilesHaveChanged package.json package-lock.json
