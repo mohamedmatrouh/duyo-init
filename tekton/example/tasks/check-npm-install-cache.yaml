@@ -41,7 +41,7 @@ spec:
 
         checkIfFilesHaveChanged() {
 
-            local files=("$@")
+            local files="$1"
             local counter=0
             for fileName in "${files[@]}";
                 do
@@ -77,4 +77,5 @@ spec:
             exit 0;
         }
 
-        checkIfFilesHaveChanged package.json package-lock.json
+        array=("package.json", "package-lock.json")                 
+        checkIfFilesHaveChanged array

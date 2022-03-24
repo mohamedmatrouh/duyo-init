@@ -16,7 +16,7 @@ loadFileHashFromCache(){
 
 checkIfFilesHaveChanged() {
 
-    local files=("$@")
+    local files="$@"
     local counter=0
     for fileName in "${files[@]}";
         do
