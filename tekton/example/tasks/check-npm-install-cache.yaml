@@ -43,6 +43,12 @@ spec:
 
             local files=("$@")
             local counter=0
+
+            if [ ! -d node_modules ]; then
+                echo "node modules not found, updates need to be installed"
+                exitFromTask 0
+            fi
+
             for fileName in "${files[@]}";
                 do
                     echo "checking $fileName.... "
@@ -61,17 +67,19 @@ spec:
                 done
                 
             if [ "$counter" == 0 ]; then
+                echo "node modules found and changes have not been detected, no updates need to be installed"
                 exitFromTask 0
             else
+                echo "node modules found but changes have been detected, updates need to be installed"
                 exitFromTask 1
             fi
         }
 
         exitFromTask() {
             if [ "$1" == 0 ]; then
-                printf "true" | tee $(results.output.path)
-            else
                 printf "false" | tee $(results.output.path)
+            else
+                printf "true" | tee $(results.output.path)
             fi
             
             exit 0;
