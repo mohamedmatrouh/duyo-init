@@ -85,4 +85,4 @@ spec:
             exit 0;
         }
                
-        checkIfFilesHaveChanged package.json, package-lock.json
+        checkIfFilesHaveChanged package.json package-lock.json
