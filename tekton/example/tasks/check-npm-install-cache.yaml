@@ -21,7 +21,7 @@ spec:
     - name: check
       image: ubuntu:20.04
       script: |
-      
+        #! /bin/bash
         cd $(workspaces.source.path)/$(params.PATH_CONTEXT)
 
         CASH_FOLDER=$(workspaces.cache.path)
@@ -41,7 +41,7 @@ spec:
 
         checkIfFilesHaveChanged() {
 
-            local files="$1"
+            local files=("$@")
             local counter=0
             for fileName in "${files[@]}";
                 do
@@ -76,6 +76,5 @@ spec:
             
             exit 0;
         }
-
-        array=("package.json", "package-lock.json")                 
-        checkIfFilesHaveChanged array
+               
+        checkIfFilesHaveChanged package.json, package-lock.json
